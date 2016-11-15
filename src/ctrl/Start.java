@@ -19,9 +19,13 @@ public class Start extends HttpServlet {
      */
     public Start() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
+    public void init(){
+    	
+    	
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
