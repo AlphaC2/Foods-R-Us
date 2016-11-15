@@ -38,7 +38,7 @@ public class ItemDAO
 	{
 		System.out.println("Searching by name!!!");
 		//SQL query
-		String query = "select * from roumani.item where name like '%?%'";
+		String query = "select * from roumani.item where name like ?";
 		
 		ArrayList<ItemBean> itemList = new ArrayList<ItemBean>();
 		
@@ -49,7 +49,7 @@ public class ItemDAO
 		PreparedStatement statement = con.prepareStatement(query);
 
 			//Replace ? in query with values
-		statement.setString(1, name);
+		statement.setString(1, "%"+name+"%");
 		
 			//Query the database
 		ResultSet rs = statement.executeQuery();

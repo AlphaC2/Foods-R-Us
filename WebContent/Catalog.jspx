@@ -14,9 +14,7 @@
 Catalogue
 
 <ul>
-	<c:forEach var="row" items="${itemList}">
-		<li>Name:${row.name} Price:${row.price}</li>
-	</c:forEach>
+
 </ul>
 </body>
 </html>

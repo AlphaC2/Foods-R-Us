@@ -49,6 +49,8 @@ public class Catalog extends HttpServlet {
 			System.out.println("In Catalog, searching by name.");
 			try
 			{
+				System.out.println("found: ");
+				System.out.println(itemDao.getItemsByName("m"));
 				itemList = itemDao.getItemsByName(request.getAttribute("search").toString());
 				System.out.println("In Catalog, search success.");
 			} catch (SQLException e)
