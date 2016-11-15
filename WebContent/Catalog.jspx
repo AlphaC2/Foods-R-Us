@@ -8,10 +8,16 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Insert title here</title>
+	<title>${target}</title>
 </head>
 <body>
+Catalogue
 
+<ul>
+	<c:forEach var="row" items="${itemList}">
+		<li>Name:${row.name} Price:${row.price}</li>
+	</c:forEach>
+</ul>
 </body>
 </html>
 </jsp:root>
