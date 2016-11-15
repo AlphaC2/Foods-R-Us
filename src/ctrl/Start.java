@@ -1,11 +1,15 @@
 package ctrl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.*;
 
 /**
  * Servlet implementation class Start
@@ -23,8 +27,19 @@ public class Start extends HttpServlet {
     }
 
     public void init(){
-    	
-    	
+    	ItemDAO i;
+		ArrayList<ItemBean> catalogueList;
+		try{
+			i = new ItemDAO();
+			catalogueList = i.getItemsByName("");
+			//System.out.println("!" + banks.get(0));
+			this.getServletContext().setAttribute("model", i);
+			this.getServletContext().setAttribute("catalogueList", catalogueList);
+
+		}catch (Exception e){
+			e.printStackTrace();
+			//throw new ServletException(e.getMessage());
+		}
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
