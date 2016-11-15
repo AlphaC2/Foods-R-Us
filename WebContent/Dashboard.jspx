@@ -8,17 +8,19 @@
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>${target }</title>
 <link rel="StyleSheet"
 	href="${pageContext.request.contextPath}/res/compositeView.css"
 	type="text/css" title="eecs4413" media="screen, print" />
 <link rel="alternate StyleSheet"
 	href="${pageContext.request.contextPath}/res/mc.css" type="text/css"
 	title="eecs4413" media="screen, print" />
+<head>
+<title>${target }</title>
+
 </head>
 <body>
-
+  <form action="" method="POST">
+  <FIELDSET>
 	<div id="wrap">
 	
 		<div id="header">
@@ -29,7 +31,7 @@
 		
 		<div id="nav">
 			<div align="right">
-				<input type="text" name="searchBar" placeholder="Search Catalogue"> </input>
+				<input type="text" name="search" placeholder="Search Catalogue"> </input>
 			</div>
 		</div>
 
@@ -55,7 +57,8 @@
 		</div>
 		
 	</div>
-	
+	</FIELDSET>
+  </form>
 </body>
 </html>
 </jsp:root>
