@@ -11,7 +11,11 @@
 <title>${target }</title>
 </head>
 <body>
-
+	<img src="res/colorful foods.png" alt="logo" height="64" width="128"></img>
+	<div align="right">
+		<a href="/">Cart</a>
+		<a href="/">${login_status}</a>
+	</div>
 </body>
 </html>
 </jsp:root>

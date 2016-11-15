@@ -28,14 +28,13 @@
 		</div>
 		
 		<div id="nav">
-			<ul>
-				<li><a href="/">Nav Option 1</a></li>
-				<li><a href="/">Nav Option 2</a></li>
-			</ul>
+			<div align="right">
+				<input type="text" name="searchBar" placeholder="Search Catalogue"> </input>
+			</div>
 		</div>
 
 		<div id="sidebar">
-			<jsp:include page="Head.jspx">
+			<jsp:include page="Sidebar.jspx">
 				<jsp:param name="ver" value="3.0" />
 			</jsp:include>
 		</div>
