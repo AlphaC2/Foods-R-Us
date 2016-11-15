@@ -31,9 +31,9 @@ public class ItemDAO
 		}
 	}
 	
+								//TODO: UNIFY THE TWO SEARCH METHODS INTO ONE
 		//Get items from search
-										//TODO: MAKE THIS WORK FOR MORE THAN JUST BY NAME
-	public List<ItemBean> getItemsByName(String name) throws SQLException
+	public ArrayList<ItemBean> getItemsByName(String name) throws SQLException
 	{
 		//SQL query
 		String query = "select * from roumani.item where name=?";
@@ -64,7 +64,39 @@ public class ItemDAO
 		}
 			//Return list of found items
 		return itemList;
+	}
+	
+	public ArrayList<ItemBean> getItemsByCategory(int category) throws SQLException
+	{
+		//SQL query
+		String query = "select * from roumani.item where name=?";
+		
+		ArrayList<ItemBean> itemList = new ArrayList<ItemBean>();
+		
+		try{
+			//Open connection to database
+		Connection con = dataSource.getConnection();
+			//Create prepared statement
+		PreparedStatement statement = con.prepareStatement(query);
 
+			//Replace ? in query with values
+		statement.setInt(1, category);
+		
+			//Query the database
+		ResultSet rs = statement.executeQuery();
+		
+		
+			//If there are remaining items matching search criteria, place them in list
+		while(rs.next() != false)
+			itemList.add(new ItemBean(rs.getString("name"), rs.getDouble("price")));
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			//Return list of found items
+		return itemList;
 	}
 		
 }
