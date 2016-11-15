@@ -42,16 +42,13 @@ public class Catalog extends HttpServlet {
 		
 		System.out.println("In Catalog, before search.");
 
-		System.out.println("Search = " + request.getParameter("search"));
 			//Check if user has entered a search query
 		if(request.getParameter("search") != null)
 		{//Search entered
 			System.out.println("In Catalog, searching by name.");
 			try
 			{
-				System.out.println("found: ");
-				System.out.println(itemDao.getItemsByName("m"));
-				itemList = itemDao.getItemsByName(request.getAttribute("search").toString());
+				itemList = itemDao.getItemsByName(request.getParameter("search").toString());
 				System.out.println("In Catalog, search success.");
 			} catch (SQLException e)
 			{
@@ -70,7 +67,7 @@ public class Catalog extends HttpServlet {
 			System.out.println("In Catalog, doing categories.");
 			try
 			{
-				itemList = itemDao.getItemsByCategory(Integer.parseInt((String) request.getAttribute("category")));
+				itemList = itemDao.getItemsByCategory(Integer.parseInt((String) request.getParameter("category")));
 				System.out.println("In Catalog, category success.");
 			} catch (SQLException e)
 			{
@@ -81,6 +78,8 @@ public class Catalog extends HttpServlet {
 		}//End category selected
 		
 		System.out.println("In Catalog, after search.");
+		System.out.println("What was found: ");
+		System.out.println(itemList);
 /*																	
 		ArrayList<ItemBean> cart = (ArrayList<ItemBean>) session.getAttribute("cart");
 		String itemNameToAdd = request.getParameter("toAdd");
