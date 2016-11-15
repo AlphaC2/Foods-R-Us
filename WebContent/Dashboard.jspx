@@ -9,7 +9,7 @@
 		omit-xml-declaration="true" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Debt Simulator 2016</title>
+<title>${target }</title>
 <link rel="StyleSheet"
 	href="${pageContext.request.contextPath}/res/compositeView.css"
 	type="text/css" title="eecs4413" media="screen, print" />
@@ -35,14 +35,9 @@
 		</div>
 
 		<div id="sidebar">
-			<h2>The Sidebar</h2>
-			<p>Select an option ...</p>
-			<ul>
-				<li><a href="${pageContext.request.contextPath}/Dashboard">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/Start">Mortgage
-						Calculator</a></li>
-				<li><a href="${pageContext.request.contextPath}/Admin">Analytics</a></li>
-			</ul>
+			<jsp:include page="Head.jspx">
+				<jsp:param name="ver" value="3.0" />
+			</jsp:include>
 		</div>
 
 		<div id="main">
@@ -51,7 +46,7 @@
 					Hello ... please choose something from the sidebar
 				</c:when>
 				<c:otherwise>
-					<jsp:include page="${target}"></jsp:include>
+					<jsp:include page="${target}.jspx"></jsp:include>
 				</c:otherwise>
 			</c:choose>
 		</div>
