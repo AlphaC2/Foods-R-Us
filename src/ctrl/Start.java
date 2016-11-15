@@ -31,7 +31,7 @@ public class Start extends HttpServlet {
 		ArrayList<ItemBean> catalogueList;
 		try{
 			i = new ItemDAO();
-			catalogueList = i.getItemsByName("");
+			catalogueList = i.getCatalogueList();
 			//System.out.println("!" + banks.get(0));
 			this.getServletContext().setAttribute("model", i);
 			this.getServletContext().setAttribute("catalogueList", catalogueList);

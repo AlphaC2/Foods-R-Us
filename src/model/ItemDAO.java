@@ -104,4 +104,35 @@ public class ItemDAO
 		return itemList;
 	}
 		
+	public ArrayList<ItemBean> getCatalogueList() throws SQLException{
+		System.out.println("Searching for category list");
+		//SQL query
+		String query = "select DISTINCT CATID from roumani.item";
+		
+		ArrayList<ItemBean> itemList = new ArrayList<ItemBean>();
+		
+		try{
+			//Open connection to database
+		Connection con = dataSource.getConnection();
+			//Create prepared statement
+		PreparedStatement statement = con.prepareStatement(query);
+		
+			//Query the database
+		ResultSet rs = statement.executeQuery();
+		
+		
+			//If there are remaining items matching search criteria, place them in list
+		while(rs.next())
+			System.out.println("Category:" + rs.getString("CATID"));
+			itemList.add(new ItemBean(rs.getString("CATID"), 0.0));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			//Return list of found items
+		System.out.println("Done searching for category list");
+		return itemList;
+	}
+	
 }
