@@ -29,12 +29,14 @@ public class ItemDAO
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("ITEMDAO CREATED.");
 	}
 	
 								//TODO: UNIFY THE TWO SEARCH METHODS INTO ONE
 		//Get items from search
 	public ArrayList<ItemBean> getItemsByName(String name) throws SQLException
 	{
+		System.out.println("Searching by name");
 		//SQL query
 		String query = "select * from roumani.item where name=?";
 		
@@ -63,11 +65,13 @@ public class ItemDAO
 			e.printStackTrace();
 		}
 			//Return list of found items
+		System.out.println("Done searching by name");
 		return itemList;
 	}
 	
 	public ArrayList<ItemBean> getItemsByCategory(int category) throws SQLException
 	{
+		System.out.println("Searching by category");
 		//SQL query
 		String query = "select * from roumani.item where name=?";
 		
@@ -96,6 +100,7 @@ public class ItemDAO
 			e.printStackTrace();
 		}
 			//Return list of found items
+		System.out.println("Done searching by category");
 		return itemList;
 	}
 		

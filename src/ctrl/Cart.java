@@ -1,23 +1,28 @@
 package ctrl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.ItemDAO;
 
 /**
- * Servlet implementation class Start
+ * Servlet implementation class Cart
  */
-@WebServlet({"/eFoods" })
-public class Start extends HttpServlet {
+@WebServlet("/Cart")
+public class Cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Start() {
+    public Cart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +31,11 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			//Get session
+		HttpSession session = request.getSession();
 		
-			//Set content pane to the home page
-		request.setAttribute("target", "Home");
-		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+			//Pull items in cart from seesion scope
+		ArrayList<ItemDAO> cart = (ArrayList<ItemDAO>) session.getAttribute("cart");
 	}
 
 	/**
