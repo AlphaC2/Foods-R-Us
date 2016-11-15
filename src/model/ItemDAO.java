@@ -36,9 +36,9 @@ public class ItemDAO
 		//Get items from search
 	public ArrayList<ItemBean> getItemsByName(String name) throws SQLException
 	{
-		System.out.println("Searching by name");
+		System.out.println("Searching by name!!!");
 		//SQL query
-		String query = "select * from roumani.item where name=?";
+		String query = "select * from roumani.item where name like '%?%'";
 		
 		ArrayList<ItemBean> itemList = new ArrayList<ItemBean>();
 		

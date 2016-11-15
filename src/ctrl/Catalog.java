@@ -17,7 +17,7 @@ import model.ItemDAO;
 /**
  * Servlet implementation class Catalog
  */
-@WebServlet("/Catalog")
+@WebServlet("/eFoods")
 public class Catalog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,9 +42,9 @@ public class Catalog extends HttpServlet {
 		
 		System.out.println("In Catalog, before search.");
 
-																		/*******SEARCHING*******/
+		System.out.println("Search = " + request.getParameter("search"));
 			//Check if user has entered a search query
-		if(request.getAttribute("search") != null)
+		if(request.getParameter("search") != null)
 		{//Search entered
 			System.out.println("In Catalog, searching by name.");
 			try
@@ -56,11 +56,14 @@ public class Catalog extends HttpServlet {
 				System.out.println("In Catalog, search failed.");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch(NullPointerException e)
+			{
+				System.out.println("No such item found!");
 			}
 		}//End search entered
 		
 			//Check if user has selected a category from sidebar
-		if(request.getAttribute("category") != null)
+		if(request.getParameter("category") != null)
 		{//Category selected
 			System.out.println("In Catalog, doing categories.");
 			try
@@ -76,14 +79,17 @@ public class Catalog extends HttpServlet {
 		}//End category selected
 		
 		System.out.println("In Catalog, after search.");
-																	/*******ADDING TO CART*******/
+/*																	
 		ArrayList<ItemBean> cart = (ArrayList<ItemBean>) session.getAttribute("cart");
 		String itemNameToAdd = request.getParameter("toAdd");
 		try
 		{
 			System.out.println("In Catalog, adding to cart.");
-			ItemBean toAdd = itemDao.getItemsByName(itemNameToAdd).get(0);
-			cart.add(toAdd);
+			if(itemNameToAdd != null)
+			{
+				ItemBean toAdd = itemDao.getItemsByName(itemNameToAdd).get(0);
+				cart.add(toAdd);
+			}
 			System.out.println("In Catalog, cart success.");
 		} catch (SQLException e)
 		{
@@ -94,7 +100,7 @@ public class Catalog extends HttpServlet {
 		session.setAttribute("cart", cart);
 		
 		System.out.println("In Catalog, after cart.");
-		
+		*/
 			//Poke the itemList into request scope to be displayed by jspx file
 		request.setAttribute("items", itemList);
 		
