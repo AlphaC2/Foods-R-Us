@@ -14,9 +14,18 @@
 <body>
 Catalogue
 
-<ul>
+<table style="width:100%">
+	 <c:forEach var="row" items="${items}">
+	   <tr>
+	   
+	    <th><a href="www.google.ca">${row.name }</a></th>
+	    <th>${row.price }</th>
+	    <th> <button type="button">Add to cart</button> </th>
+	  </tr>
+	</c:forEach>
+</table> 
 
-</ul>
+
 </body>
 </html>
 </jsp:root>

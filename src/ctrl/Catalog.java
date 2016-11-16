@@ -42,6 +42,7 @@ public class Catalog extends HttpServlet {
 		
 		System.out.println("In Catalog, before search.");
 
+		System.out.println("SEARCHING FOR " + request.getParameter("search"));
 			//Check if user has entered a search query
 		if(request.getParameter("search") != null)
 		{//Search entered
