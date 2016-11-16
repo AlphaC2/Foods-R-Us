@@ -81,9 +81,15 @@ public class Catalog extends HttpServlet {
 		System.out.println("In Catalog, after search.");
 		System.out.println("What was found: ");
 		System.out.println(itemList);
-/*																	
-		ArrayList<ItemBean> cart = (ArrayList<ItemBean>) session.getAttribute("cart");
-		String itemNameToAdd = request.getParameter("toAdd");
+		
+		ArrayList<ItemBean> cart = new ArrayList<ItemBean>();
+		if(session.getAttribute("cart") != null)
+		{
+			cart = (ArrayList<ItemBean>) session.getAttribute("cart");
+		}
+
+		
+		String itemNameToAdd = request.getParameter("cartAdd");
 		try
 		{
 			System.out.println("In Catalog, adding to cart.");
@@ -100,9 +106,9 @@ public class Catalog extends HttpServlet {
 			e.printStackTrace();
 		}
 		session.setAttribute("cart", cart);
-		
+		System.out.println("PRINTING CART: " + cart);
 		System.out.println("In Catalog, after cart.");
-		*/
+		
 			//Poke the itemList into request scope to be displayed by jspx file
 		request.setAttribute("items", itemList);
 		
@@ -111,6 +117,10 @@ public class Catalog extends HttpServlet {
 		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
 	}
 
+	private void addToCart(HttpServletRequest request, HttpServletResponse response)
+	{
+		
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
