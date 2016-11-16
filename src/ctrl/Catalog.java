@@ -38,12 +38,34 @@ public class Catalog extends HttpServlet {
 		
 		//List for items along with DAO for database interaction
 		ItemDAO itemDao = new ItemDAO();
-		ArrayList<ItemBean> itemList = null;
+		
 		
 		System.out.println("In Catalog, before search.");
 
+		searchCatalog(request, response, itemDao, session);
+		
+		System.out.println("In Catalog, after search.");
+		
+		
+		addToCart(request, response, itemDao, session);
+		
+		System.out.println("In Catalog, after cart.");
+		
+		
+		
+			//Set target of content pane to catalog view - Refresh Dashboard
+		request.setAttribute("target", "Catalog");
+		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+	}
+
+				/**Handle searching the catalog by user input**/ 
+	private void searchCatalog(HttpServletRequest request, HttpServletResponse response, ItemDAO itemDao, HttpSession session)
+	{
+		
 		System.out.println("SEARCHING FOR " + request.getParameter("search"));
-			//Check if user has entered a search query
+		ArrayList<ItemBean> itemList = null;
+		
+		//Check if user has entered a search query
 		if(request.getParameter("search") != null)
 		{//Search entered
 			System.out.println("In Catalog, searching by name.");
@@ -78,10 +100,16 @@ public class Catalog extends HttpServlet {
 			}
 		}//End category selected
 		
-		System.out.println("In Catalog, after search.");
 		System.out.println("What was found: ");
 		System.out.println(itemList);
 		
+		//Poke the itemList into request scope to be displayed by jspx file
+		request.setAttribute("items", itemList);
+	}
+				/**Handle adding items from catalog view to cart**/
+	
+	private void addToCart(HttpServletRequest request, HttpServletResponse response, ItemDAO itemDao, HttpSession session)
+	{
 		ArrayList<ItemBean> cart = new ArrayList<ItemBean>();
 		if(session.getAttribute("cart") != null)
 		{
@@ -107,19 +135,6 @@ public class Catalog extends HttpServlet {
 		}
 		session.setAttribute("cart", cart);
 		System.out.println("PRINTING CART: " + cart);
-		System.out.println("In Catalog, after cart.");
-		
-			//Poke the itemList into request scope to be displayed by jspx file
-		request.setAttribute("items", itemList);
-		
-			//Set target of content pane to catalog view - Refresh Dashboard
-		request.setAttribute("target", "Catalog");
-		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
-	}
-
-	private void addToCart(HttpServletRequest request, HttpServletResponse response)
-	{
-		
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
