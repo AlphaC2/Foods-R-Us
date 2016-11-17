@@ -12,18 +12,23 @@
 	<title>${target}</title>
 </head>
 <body>
-Catalog
-
 <table style="width:100%">
-	 <c:forEach var="row" items="${items}">
-	   <form method="POST">
-	   <tr>
-	    <th>${row.name }</th>
-	    <th>${row.price }</th>
-	    <th> <button type="submit" name="cartAdd" value="${row.name }">Add to cart</button> </th>
-	  </tr>
-	  </form>
-	</c:forEach>
+	<c:choose>
+	<c:when test="${not empty items}">
+		<c:forEach var="row" items="${items}">
+		   <form method="POST">
+		   <tr>
+		    <th>${row.name }</th>
+		    <th>$${row.price }</th>
+		    <th> <button type="submit" name="cartAdd" value="${row.name }">Add to cart</button> </th>
+		  </tr>
+		  </form>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		Sorry, no results found.
+	</c:otherwise>
+	</c:choose>
 </table> 
 
 

@@ -33,6 +33,8 @@ public class Catalog extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Catalog.java start");
+		String target = null;
 		//Get session
 		HttpSession session = request.getSession();
 		
@@ -43,8 +45,16 @@ public class Catalog extends HttpServlet {
 		addToCart(request, response, itemDao, session);
 
 			//Set target of content pane to catalog view - Refresh Dashboard
-		request.setAttribute("target", "Catalog");
-		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+		System.out.println("Catalog.java end");
+		if(request.getParameter("cartAdd") == null){
+			request.setAttribute("target", "Catalog");
+			target = "/Dashboard.jspx";
+		}else{
+			request.setAttribute("target", "Cart");
+			target = "/Cart";
+		}
+	
+		this.getServletContext().getRequestDispatcher(target).forward(request, response);
 	}
 
 				/**Handle searching the catalog by user input**/ 
@@ -100,6 +110,7 @@ public class Catalog extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	private void addToCart(HttpServletRequest request, HttpServletResponse response, ItemDAO itemDao, HttpSession session)
 	{
+		
 		ArrayList<ItemBean> cart = new ArrayList<ItemBean>();
 		if(session.getAttribute("cart") != null)
 		{
@@ -108,6 +119,7 @@ public class Catalog extends HttpServlet {
 
 		
 		String itemNameToAdd = request.getParameter("cartAdd");
+		System.out.println("Item to add to cart:" + itemNameToAdd);
 		try
 		{
 			System.out.println("In Catalog, adding to cart.");

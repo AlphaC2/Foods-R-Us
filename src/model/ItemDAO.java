@@ -57,7 +57,7 @@ public class ItemDAO
 		
 			//If there are remaining items matching search criteria, place them in list
 		while(rs.next() != false)
-			itemList.add(new ItemBean(rs.getString("name"), rs.getDouble("price")));
+			itemList.add(new ItemBean(rs.getString("name"),(double) Math.round(rs.getDouble("price")*100)/100));
 
 		}
 		catch(Exception e)
@@ -124,7 +124,11 @@ public class ItemDAO
 			//If there are remaining items matching search criteria, place them in list
 		while(rs.next())
 			System.out.println("Category:" + rs.getString("CATID"));
-			itemList.add(new ItemBean(rs.getString("CATID"), 0.0));
+			try{
+				itemList.add(new ItemBean(rs.getString("CATID"), 0.0));
+			}catch(SQLException e){
+				System.err.println(e.getMessage());
+			}
 		}
 		catch(Exception e)
 		{

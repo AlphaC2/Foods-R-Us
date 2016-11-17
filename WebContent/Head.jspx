@@ -13,7 +13,9 @@
 <body>
  <img src="res/colorful foods.png" alt="logo" height="64" width="128"></img>
  <div align="right">
-  <a href="Cart">Cart</a>
+  <a href="eFoodz">Homepage</a>
+  <a href="eFoods"> Catalogue</a>
+  <a href="Cart"> Cart</a>
   <a href="#">${login_status}</a>
  </div>
 </body>

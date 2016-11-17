@@ -32,10 +32,8 @@ public class Start extends HttpServlet {
 		try{
 			i = new ItemDAO();
 			catalogueList = i.getCatalogueList();
-			//System.out.println("!" + banks.get(0));
 			this.getServletContext().setAttribute("model", i);
 			this.getServletContext().setAttribute("catalogueList", catalogueList);
-
 		}catch (Exception e){
 			e.printStackTrace();
 			//throw new ServletException(e.getMessage());
@@ -45,10 +43,25 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("Request Start");
 			//Set content pane to the home page
-		request.setAttribute("target", "Home");
-		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+		String target = null; //Request.forward parameter 
+		if(request.getParameter("search") != null){
+			System.out.println("Redirecting to catalog");
+			request.setAttribute("target", "Catalog");
+			target = "/eFoods";
+		}else if(request.getParameter("cartAdd") != null){
+			System.out.println("Redirecting to cart");
+			request.setAttribute("target", "cart");
+			target = "/Cart";
+		}else{
+			System.out.println("Redirecting to home");
+			request.setAttribute("target", "Home");
+			target = "/Dashboard.jspx";
+		}
+
+		this.getServletContext().getRequestDispatcher(target).forward(request, response);
+		System.out.println("Request End");
 	}
 
 	/**
