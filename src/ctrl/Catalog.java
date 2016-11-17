@@ -38,21 +38,10 @@ public class Catalog extends HttpServlet {
 		
 		//List for items along with DAO for database interaction
 		ItemDAO itemDao = new ItemDAO();
-		
-		
-		System.out.println("In Catalog, before search.");
 
 		searchCatalog(request, response, itemDao, session);
-		
-		System.out.println("In Catalog, after search.");
-		
-		
 		addToCart(request, response, itemDao, session);
-		
-		System.out.println("In Catalog, after cart.");
-		
-		
-		
+
 			//Set target of content pane to catalog view - Refresh Dashboard
 		request.setAttribute("target", "Catalog");
 		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);

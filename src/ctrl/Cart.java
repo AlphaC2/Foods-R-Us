@@ -1,6 +1,7 @@
 package ctrl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ItemBean;
 import model.ItemDAO;
 
 /**
@@ -34,8 +36,33 @@ public class Cart extends HttpServlet {
 			//Get session
 		HttpSession session = request.getSession();
 		
-			//Pull items in cart from seesion scope
+			//Pull items in cart from session scope, place into request
+		@SuppressWarnings("unchecked")
 		ArrayList<ItemDAO> cart = (ArrayList<ItemDAO>) session.getAttribute("cart");
+		ItemDAO itemDao = new ItemDAO();
+		ArrayList<ItemBean> toRemove = new ArrayList<ItemBean>();
+		
+		try
+		{
+			toRemove = itemDao.getItemsByName(request.getParameter("cartRemove"));
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("TO REMOVE " + toRemove.get(0));
+		if((toRemove.get(0) != null) && (cart != null))
+		{
+			ItemBean removePlease = toRemove.get(0);
+			cart.remove(removePlease);
+			System.out.println("NEW CART: " + cart);
+		}
+		
+		request.setAttribute("cart", cart);
+			//Forward to the cart page
+		request.setAttribute("target", "Cart");
+		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
 	}
 
 	/**
