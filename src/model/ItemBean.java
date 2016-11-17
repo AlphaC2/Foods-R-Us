@@ -41,5 +41,11 @@ public class ItemBean
 		return "ItemBean [name=" + name + ", price=" + price + "]";
 	}
 	
-	
+	public boolean equals(ItemBean other)
+	{
+		if((other.getName().equals(this.name)) && (other.getPrice().toString().equals(this.price.toString())))
+			return true;
+		else
+			return false;
+	}
 }

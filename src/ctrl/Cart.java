@@ -38,7 +38,7 @@ public class Cart extends HttpServlet {
 		
 			//Pull items in cart from session scope, place into request
 		@SuppressWarnings("unchecked")
-		ArrayList<ItemDAO> cart = (ArrayList<ItemDAO>) session.getAttribute("cart");
+		ArrayList<ItemBean> cart = (ArrayList<ItemBean>) session.getAttribute("cart");
 		ItemDAO itemDao = new ItemDAO();
 		ArrayList<ItemBean> toRemove = new ArrayList<ItemBean>();
 		
@@ -54,9 +54,13 @@ public class Cart extends HttpServlet {
 		System.out.println("TO REMOVE " + toRemove.get(0));
 		if((toRemove.get(0) != null) && (cart != null))
 		{
-			ItemBean removePlease = toRemove.get(0);
-			cart.remove(removePlease);
-			System.out.println("NEW CART: " + cart);
+			
+			for(int i = 0; i < cart.size(); i++)
+			{
+				if(cart.get(i).equals(toRemove.get(0)))
+					cart.remove(i);
+				
+			}
 		}
 		
 		request.setAttribute("cart", cart);
