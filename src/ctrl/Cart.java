@@ -51,16 +51,22 @@ public class Cart extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		System.out.println("TO REMOVE " + toRemove.get(0));
-		if((toRemove.get(0) != null) && (cart != null))
+		try
 		{
-			
-			for(int i = 0; i < cart.size(); i++)
+			if((toRemove.get(0) != null) && (cart != null))
 			{
-				if(cart.get(i).equals(toRemove.get(0)))
-					cart.remove(i);
 				
+				for(int i = 0; i < cart.size(); i++)
+				{
+					if(cart.get(i).equals(toRemove.get(0)))
+						cart.remove(i);
+					
+				}
 			}
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			System.out.println("Nothing to be removed");
 		}
 		
 		request.setAttribute("cart", cart);

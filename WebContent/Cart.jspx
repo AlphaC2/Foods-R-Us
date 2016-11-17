@@ -13,6 +13,10 @@
 </head>
 <body>
 <table style="width:100%">
+	<tr>
+	<th>Item</th>
+	<th>Price</th>
+	</tr>
 	 <c:forEach var="row" items="${cart}">
 	   <form method="POST">
 	   <tr>
