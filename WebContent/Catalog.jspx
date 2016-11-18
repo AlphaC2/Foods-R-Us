@@ -12,17 +12,20 @@
 	<title>${target}</title>
 </head>
 <body>
+
+Search by Item Number <input type="search" name="searchNumber" placeholder="Item Number"> </input><br/>
+Search by Name <input type="search" name="searchName" placeholder="Item Name"> </input><br/>
+Search by Category <input type="search" name="searchCategory" placeholder="Category"> </input><br/>
+
 <table style="width:100%">
 	<c:choose>
 	<c:when test="${not empty items}">
 		<c:forEach var="row" items="${items}">
-		   <form method="POST">
 		   <tr>
 		    <th>${row.name }</th>
 		    <th>$${row.price }</th>
 		    <th> <button type="submit" name="cartAdd" value="${row.name }">Add to cart</button> </th>
 		  </tr>
-		  </form>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
@@ -30,7 +33,6 @@
 	</c:otherwise>
 	</c:choose>
 </table> 
-
 
 </body>
 </html>

@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form method="POST">
 	<c:choose>
 	<c:when test="${not empty cart}">
 		<table style="width:100%">
@@ -20,13 +21,11 @@
 			<th>Price</th>
 			</tr>
 			 <c:forEach var="row" items="${cart}">
-			   <form method="POST">
 			   <tr>
 			    <th>${row.name }</th>
 			    <th>$${row.price }</th>
 			    <th> <button type="submit" name="cartRemove" value="${row.name }">Remove from cart</button> </th>
 			  </tr>
-			  </form>
 			</c:forEach>
 		</table> 
 	</c:when>
@@ -34,6 +33,7 @@
 		No items in cart.
 	</c:otherwise>
 	</c:choose>
+</form>
 </body>
 </html>
 </jsp:root>

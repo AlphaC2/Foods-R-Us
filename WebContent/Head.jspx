@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+			xmlns:c="http://java.sun.com/jsp/jstl/core">
  <jsp:directive.page contentType="text/html; charset=UTF-8" 
   pageEncoding="UTF-8" session="false"/>
  <jsp:output doctype-root-element="html"
@@ -12,12 +13,30 @@
 </head>
 <body>
  <img src="res/colorful foods.png" alt="logo" height="64" width="128"></img>
- <div align="right">
-  <a href="eFoodz">Homepage</a>
-  <a href="eFoods"> Catalogue</a>
-  <a href="Cart"> Cart</a>
-  <a href="#">${login_status}</a>
+ <div align="left">
+ 	<table><tr>
+	<td><a href="eFoodz">Homepage</a></td>
+	<td><a href="eFoods"> Catalog</a></td>
+	<td><a href="Cart"> Cart</a></td>
+	<td><a href="#">${login_status}</a></td>
+	<td>
+		<div class="dropdown">
+		<button class="dropbtn"><a href="Cart"> Cart</a></button>
+		<div class="dropdown-content">
+			<ul style="list-style-type:none">
+			
+			<c:forEach var="row" items="${cart}">
+				<li>${row.name}<br/></li>
+			</c:forEach>
+			</ul>
+		</div>
+		</div>
+	
+	</td>
+	</tr></table>
  </div>
+ 
+
 </body>
 </html>
 </jsp:root>
