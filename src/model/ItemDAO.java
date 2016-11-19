@@ -73,7 +73,7 @@ public class ItemDAO
 	{
 		System.out.println("Searching by category");
 		//SQL query
-		String query = "select * from roumani.item where name=?";
+		String query = "select * from roumani.item where CATID=?";
 		
 		ArrayList<ItemBean> itemList = new ArrayList<ItemBean>();
 		
@@ -123,9 +123,18 @@ public class ItemDAO
 		
 			//If there are remaining items matching search criteria, place them in list
 		while(rs.next())
-			System.out.println("Category:" + rs.getString("CATID"));
+//			System.out.println("Category:" + rs.getString("CATID"));
 			try{
-				itemList.add(new ItemBean(rs.getString("CATID"), 0.0));
+				String categoryCheck = rs.getString("CATID");
+				if(categoryCheck.equals("3"))
+					itemList.add(new ItemBean("Meats", 3));
+				else if(categoryCheck.equals("4"))
+					itemList.add(new ItemBean("Cheese", 4));
+				else if(categoryCheck.equals("5"))
+					itemList.add(new ItemBean("Deserts", 5));
+				else if(categoryCheck.equals("6"))
+					itemList.add(new ItemBean("Cereal", 6));
+				
 			}catch(SQLException e){
 				System.err.println(e.getMessage());
 			}
