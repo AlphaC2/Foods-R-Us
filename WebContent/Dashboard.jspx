@@ -31,7 +31,10 @@
 		
 		<div id="nav">
 			<div align="right">
+			<form target="Catalog">
 				<input type="text" name="search" placeholder="Search Catalogue"> </input>
+				<input type="submit"></input>
+			</form>
 			</div>
 		</div>
 

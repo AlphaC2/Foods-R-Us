@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+			xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<jsp:directive.page contentType="text/html; charset=UTF-8" 
 		pageEncoding="UTF-8" session="false"/>
 	<jsp:output doctype-root-element="html"
@@ -17,7 +18,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-SIDEBAR
+<form method="GET">
+<c:forEach var="row" items="${categoryList}">
+    <th><button type="submit" name="category" value="${row.priceRound }">${row.name }</button></th>
+    <br/>
+</c:forEach>
+</form>
 </body>
 </html>
 </jsp:root>

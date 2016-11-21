@@ -5,6 +5,7 @@ public class ItemBean
 		//Item attributes
 	private String name;
 	private Double price;
+	private int priceRound;
 	
 		//Constructor
 	public ItemBean(String name, Double price)
@@ -12,6 +13,14 @@ public class ItemBean
 		super();
 		this.name = name;
 		this.price = price;
+		this.priceRound = (int) Math.round(price);
+	}
+	public ItemBean(String name, int price)
+	{
+		super();
+		this.name = name;
+		this.price = (double) price;
+		this.priceRound = price;
 	}
 
 										/////////MUTATORS/ACCESSORS
@@ -47,5 +56,15 @@ public class ItemBean
 			return true;
 		else
 			return false;
+	}
+
+	public int getPriceRound()
+	{
+		return priceRound;
+	}
+
+	public void setPriceRound(int priceRound)
+	{
+		this.priceRound = priceRound;
 	}
 }
