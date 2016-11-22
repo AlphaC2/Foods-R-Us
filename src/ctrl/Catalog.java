@@ -37,7 +37,14 @@ public class Catalog extends HttpServlet {
 		String target = null;
 		//Get session
 		HttpSession session = request.getSession();
-		
+		try
+		{
+			Start.getCategories(request, response);
+		} catch (SQLException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//List for items along with DAO for database interaction
 		ItemDAO itemDao = new ItemDAO();
 
@@ -134,7 +141,6 @@ public class Catalog extends HttpServlet {
 					if(cart.get(i).equals(toAdd))
 					{
 						cart.get(i).setQuantity(cart.get(i).getQuantity()+1);
-						System.out.println("!!!!!!!!!!!!QUANTITY: " + cart.get(i).getQuantity());
 						inCartFlag = 1;
 					}
 				}

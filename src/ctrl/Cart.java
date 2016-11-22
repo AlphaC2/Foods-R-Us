@@ -37,7 +37,14 @@ public class Cart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			//Get session
 		HttpSession session = request.getSession();
-		
+		try
+		{
+			Start.getCategories(request, response);
+		} catch (SQLException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 			//Pull items in cart from session scope, place into request
 		@SuppressWarnings("unchecked")
 		ArrayList<ItemBean> cart = (ArrayList<ItemBean>) session.getAttribute("cart");
@@ -52,18 +59,23 @@ public class Cart extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println("Cart:toRemove:"+toRemove);
-		//System.out.println("Cart:cartRemove:"+request.getParameter("cartRemove"));
-		//System.out.println("Cart:search:"+request.getParameter("search"));
+
 		try
 		{
+				//Removing an item from cart
 			if((toRemove.get(0) != null) && (cart != null))
 			{
+					//Find the item to be removed
 				for(int i = 0; i < cart.size(); i++)
 				{
+						//Item found!
 					if(cart.get(i).equals(toRemove.get(0)))
-						cart.remove(i);
+					{
+							//Reset quantity to 0 - prevent previous quantity from being remembered if removed then readded to cart
+						cart.get(i).setQuantity(0);
+						toRemove.get(0).setQuantity(0);
+						cart.remove(i); //Remove from cart
+					}
 				}
 			}
 		}

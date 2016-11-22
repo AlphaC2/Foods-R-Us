@@ -9,26 +9,41 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>${target}</title>
+<title>Insert title here</title>
 </head>
 <body>
-<table style="width:100%">
-	<c:choose>
-	<c:when test="${not empty items}">
-		<c:forEach var="row" items="${items}">
-		   <tr>
-		    <th>${row.name }</th>
-		    <th>$${row.price }</th>
-		    <th> <button type="submit" name="cartAdd" value="${row.name }">Add to cart</button> </th>
-		  </tr>
-		</c:forEach>
-	</c:when>
-	<c:otherwise>
-		Sorry, no results found.
-	</c:otherwise>
-	</c:choose>
+<table style="width:50%" border="1">
+	<tr>
+	<th>Item</th>
+	<th>Price</th>
+	<th>Quantity</th>
+	</tr>
+	<c:forEach var="row" items="${cart}">
+		<tr>
+			<th>${row.name }</th>
+			<th>$${row.price }</th>
+			<th>${row.quantity }</th>
+			</tr>
+	</c:forEach>
 </table> 
-
+<table style="width:25%" border="1">
+<tr>
+<th></th>
+<th>Price</th>
+</tr>
+<tr>
+<th>Subtotal</th><th>${subtotal }</th>
+</tr>
+<tr>
+<th>Shipping</th><th>${shippingCost }</th>
+</tr>
+<tr>
+<th>HST</th><th>${taxTotal }</th>
+</tr>
+<tr>
+<th>Total</th><th>${total }</th>
+</tr>
+</table>
 </body>
 </html>
 </jsp:root>

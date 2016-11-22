@@ -35,6 +35,10 @@
 		No items in cart.
 	</c:otherwise>
 	</c:choose>
+	<br/>
+	<div align="right">
+	<button type="submit" name="checkout" value="Checkout" target="Checkout.jspx">Checkout!</button>
+	</div>
 </form>
 </body>
 </html>

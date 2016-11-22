@@ -15,7 +15,7 @@ import model.*;
 /**
  * Servlet implementation class Start
  */
-@WebServlet({"/eFoodz" })
+@WebServlet({"/eFoods" })
 public class Start extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -78,7 +78,7 @@ public class Start extends HttpServlet {
 		System.out.println("Request End");
 	}
 
-	public void getCategories(HttpServletRequest request, HttpServletResponse response) throws SQLException
+	public static void getCategories(HttpServletRequest request, HttpServletResponse response) throws SQLException
 	{
 		System.out.println("GETTING CATEGoRiES");
 			//Search database for all categories, collect them in an arraylist to poke into request

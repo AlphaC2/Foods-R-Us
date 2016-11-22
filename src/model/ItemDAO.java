@@ -29,7 +29,6 @@ public class ItemDAO
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("ITEMDAO CREATED.");
 	}
 	
 								//TODO: UNIFY THE TWO SEARCH METHODS INTO ONE
@@ -58,6 +57,10 @@ public class ItemDAO
 			//If there are remaining items matching search criteria, place them in list
 		while(rs.next() != false)
 			itemList.add(new ItemBean(rs.getString("name"),(double) Math.round(rs.getDouble("price")*100)/100));
+		
+		con.close();
+		statement.close();
+		rs.close();
 
 		}
 		catch(Exception e)
@@ -66,6 +69,8 @@ public class ItemDAO
 		}
 			//Return list of found items
 		System.out.println("Done searching by name");
+			//Close all connections
+		
 		return itemList;
 	}
 	
@@ -93,6 +98,10 @@ public class ItemDAO
 			//If there are remaining items matching search criteria, place them in list
 		while(rs.next() != false)
 			itemList.add(new ItemBean(rs.getString("name"), rs.getDouble("price")));
+		
+		con.close();
+		statement.close();
+		rs.close();
 
 		}
 		catch(Exception e)
@@ -138,6 +147,9 @@ public class ItemDAO
 			}catch(SQLException e){
 				System.err.println(e.getMessage());
 			}
+		con.close();
+		statement.close();
+		rs.close();
 		}
 		catch(Exception e)
 		{

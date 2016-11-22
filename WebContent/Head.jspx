@@ -15,8 +15,8 @@
  <img src="res/colorful foods.png" alt="logo" height="64" width="128"></img>
  <div align="left">
  	<table><tr>
-	<td><a href="eFoodz">Homepage</a></td>
-	<td><a href="eFoods"> Catalog</a></td>
+	<td><a href="eFoods">Homepage</a></td>
+	<td><a href="Catalog"> Catalog</a></td>
 	<td><a href="Cart"> Cart</a></td>
 	<td><a href="#">${login_status}</a></td>
 	<td>
