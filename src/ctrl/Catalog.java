@@ -126,7 +126,21 @@ public class Catalog extends HttpServlet {
 			if(itemNameToAdd != null)
 			{
 				ItemBean toAdd = itemDao.getItemsByName(itemNameToAdd).get(0);
-				cart.add(toAdd);
+				int inCartFlag = 0;
+									//cart.contains doesnt work - iterate over all elements checking equality
+				for(int i = 0; i < cart.size(); i++)
+				{
+						//If item exists in cart add one to current quantity
+					if(cart.get(i).equals(toAdd))
+					{
+						cart.get(i).setQuantity(cart.get(i).getQuantity()+1);
+						System.out.println("!!!!!!!!!!!!QUANTITY: " + cart.get(i).getQuantity());
+						inCartFlag = 1;
+					}
+				}
+					//New item - add to cart with quantity 1
+				if(inCartFlag == 0)
+					cart.add(toAdd);
 			}
 			System.out.println("In Catalog, cart success.");
 		} catch (SQLException e)

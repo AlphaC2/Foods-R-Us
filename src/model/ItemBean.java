@@ -6,14 +6,24 @@ public class ItemBean
 	private String name;
 	private Double price;
 	private int priceRound;
+	private int quantity;
 	
-		//Constructor
+		public int getQuantity()
+	{
+		return quantity;
+	}
+	public void setQuantity(int quantity)
+	{
+		this.quantity = quantity;
+	}
+	//Constructor
 	public ItemBean(String name, Double price)
 	{
 		super();
 		this.name = name;
 		this.price = price;
 		this.priceRound = (int) Math.round(price);
+		this.quantity = 1;
 	}
 	public ItemBean(String name, int price)
 	{
@@ -21,6 +31,7 @@ public class ItemBean
 		this.name = name;
 		this.price = (double) price;
 		this.priceRound = price;
+		this.quantity = 1;
 	}
 
 										/////////MUTATORS/ACCESSORS
