@@ -115,7 +115,7 @@ public class Catalog extends HttpServlet {
 				/**Handle adding items from catalog view to cart**/
 	
 	@SuppressWarnings("unchecked")
-	private void addToCart(HttpServletRequest request, HttpServletResponse response, ItemDAO itemDao, HttpSession session)
+	public static void addToCart(HttpServletRequest request, HttpServletResponse response, ItemDAO itemDao, HttpSession session)
 	{
 		
 		ArrayList<ItemBean> cart = new ArrayList<ItemBean>();

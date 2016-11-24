@@ -85,9 +85,22 @@ public class Cart extends HttpServlet {
 		}
 		
 		request.setAttribute("cart", cart);
+		
+			//Add to cart
+		if(request.getParameter("cartAdd") != null)
+			Catalog.addToCart(request, response, itemDao, session);
+		
+		String target;
+		if((request.getParameter("category") == null) && ((request.getParameter("search") == null) || (request.getParameter("search").equals("")))){
+			request.setAttribute("target", "Cart");
+			target = "/Dashboard.jspx";
+		}else{
+			request.setAttribute("target", "Catalog");
+			target = "/Catalog";
+		}
 			//Forward to the cart page
-		request.setAttribute("target", "Cart");
-		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+//		request.setAttribute("target", "Cart");
+		this.getServletContext().getRequestDispatcher(target).forward(request, response);
 	}
 
 	/**
