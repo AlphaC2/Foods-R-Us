@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="GET">
+<form method="POST">
 <c:forEach var="row" items="${categoryList}">
     <th><button type="submit" name="category" value="${row.priceRound }">${row.name }</button></th>
     <br/>

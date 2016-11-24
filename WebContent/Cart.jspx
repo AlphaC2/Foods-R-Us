@@ -37,7 +37,7 @@
 	</c:choose>
 	<br/>
 	<div align="right">
-	<button type="submit" name="checkout" value="Checkout" target="Checkout.jspx">Checkout!</button>
+	<a href="Checkout">Checkout</a>
 	</div>
 </form>
 </body>

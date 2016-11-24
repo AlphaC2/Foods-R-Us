@@ -68,6 +68,10 @@ public class Start extends HttpServlet {
 			System.out.println("Redirecting to cart");
 			request.setAttribute("target", "cart");
 			target = "/Cart";
+		}else if(request.getParameter("cartRemove") != null){
+			request.setAttribute("target", "cart");
+			request.setAttribute("cartRemove", request.getParameter("cartRemove"));
+			target = "/Cart";
 		}else{
 			System.out.println("Redirecting to home");
 			request.setAttribute("target", "Home");

@@ -68,7 +68,7 @@ public class Checkout extends HttpServlet {
 		
 			//Forward user to checkout page
 		request.setAttribute("target", "Checkout");
-		this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/Checkout.jspx").forward(request, response);
 	}
 
 	/**
