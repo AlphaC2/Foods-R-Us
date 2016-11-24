@@ -53,7 +53,7 @@ public class Catalog extends HttpServlet {
 
 			//Set target of content pane to catalog view - Refresh Dashboard
 		System.out.println("Catalog.java end");
-		if(request.getParameter("cartAdd") == null){
+		if((request.getParameter("cartAdd") == null) && (request.getParameter("cartRemove") == null)){
 			request.setAttribute("target", "Catalog");
 			target = "/Dashboard.jspx";
 		}else{
