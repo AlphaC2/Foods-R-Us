@@ -11,15 +11,15 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
-  	<param-name>freeShipMin</param-name>
-  	<param-value>100.00</param-value>
+    <param-name>freeShipMin</param-name>
+    <param-value>100.00</param-value>
   </context-param>
   <context-param>
-  	<param-name>shippingCost</param-name>
-  	<param-value>5.00</param-value>
+    <param-name>shippingCost</param-name>
+    <param-value>5.00</param-value>
   </context-param>
   <context-param>
-  	<param-name>taxPercent</param-name>
-  	<param-value>0.13</param-value>
+    <param-name>taxPercent</param-name>
+    <param-value>0.13</param-value>
   </context-param>
 </web-app>
