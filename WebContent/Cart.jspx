@@ -30,15 +30,16 @@
 			  </tr>
 			</c:forEach>
 		</table> 
+		<br/>
+	<div align="right">
+	<a href="Checkout">Checkout</a>
+	</div>
 	</c:when>
 	<c:otherwise>
 		No items in cart.
 	</c:otherwise>
 	</c:choose>
-	<br/>
-	<div align="right">
-	<a href="Checkout">Checkout</a>
-	</div>
+	
 </form>
 </body>
 </html>
