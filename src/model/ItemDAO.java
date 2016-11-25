@@ -35,7 +35,7 @@ public class ItemDAO
 		//Get items from search
 	public ArrayList<ItemBean> getItemsByName(String name) throws SQLException
 	{
-		System.out.println("Searching by name!!!");
+//		System.out.println("Searching by name!!!");
 		//SQL query
 		String query = "select * from roumani.item where name like ?";
 		
@@ -68,7 +68,7 @@ public class ItemDAO
 			e.printStackTrace();
 		}
 			//Return list of found items
-		System.out.println("Done searching by name");
+//		System.out.println("Done searching by name");
 			//Close all connections
 		
 		return itemList;
@@ -109,12 +109,12 @@ public class ItemDAO
 			e.printStackTrace();
 		}
 			//Return list of found items
-		System.out.println("Done searching by category");
+//		System.out.println("Done searching by category");
 		return itemList;
 	}
 		
 	public ArrayList<ItemBean> getCatalogueList() throws SQLException{
-		System.out.println("Searching for category list");
+//		System.out.println("Searching for category list");
 		//SQL query
 		String query = "select DISTINCT CATID from roumani.item";
 		
@@ -153,10 +153,10 @@ public class ItemDAO
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			System.out.println("ERROR! Could not connect to database, or find anything inside.\nDid you remember to start and connect to Derby?");
 		}
 			//Return list of found items
-		System.out.println("Done searching for category list");
+//		System.out.println("Done searching for category list");
 		return itemList;
 	}
 	

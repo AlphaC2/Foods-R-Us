@@ -28,7 +28,7 @@ public class Cart extends HttpServlet {
      */
     public Cart() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -42,8 +42,7 @@ public class Cart extends HttpServlet {
 			Start.getCategories(request, response);
 		} catch (SQLException e1)
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("ERROR! Could not get categories.\nDid you remember to start and connect to Derby?");
 		}
 			//Pull items in cart from session scope, place into request
 		@SuppressWarnings("unchecked")
@@ -56,8 +55,7 @@ public class Cart extends HttpServlet {
 			toRemove = itemDao.getItemsByName(request.getParameter("cartRemove"));
 		} catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not remove the item from cart!");
 		}
 
 		try
@@ -107,7 +105,6 @@ public class Cart extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

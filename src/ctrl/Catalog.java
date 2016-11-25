@@ -26,14 +26,13 @@ public class Catalog extends HttpServlet {
      */
     public Catalog() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Catalog.java start");
+//		System.out.println("Catalog.java start");
 		String target = null;
 		//Get session
 		HttpSession session = request.getSession();
@@ -42,8 +41,7 @@ public class Catalog extends HttpServlet {
 			Start.getCategories(request, response);
 		} catch (SQLException e1)
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("ERROR! Could not get categories.\nDid you remember to start and connect to Derby?");
 		}
 		//List for items along with DAO for database interaction
 		ItemDAO itemDao = new ItemDAO();
@@ -68,25 +66,24 @@ public class Catalog extends HttpServlet {
 	private void searchCatalog(HttpServletRequest request, HttpServletResponse response, ItemDAO itemDao, HttpSession session)
 	{
 		
-		System.out.println("SEARCHING FOR " + request.getParameter("search"));
+//		System.out.println("SEARCHING FOR " + request.getParameter("search"));
 		ArrayList<ItemBean> itemList = null;
 		
 		//Check if user has entered a search query
 		if(request.getParameter("search") != null)
 		{//Search entered
-			System.out.println("In Catalog, searching by name.");
+//			System.out.println("In Catalog, searching by name.");
 			try
 			{
 				itemList = itemDao.getItemsByName(request.getParameter("search").toString());
-				System.out.println("In Catalog, search success.");
+//				System.out.println("In Catalog, search success.");
 			} catch (SQLException e)
 			{
-				System.out.println("In Catalog, search failed.");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				System.out.println("In Catalog, search failed.");
+				System.out.println("ERROR! Could not search database.\n Are you connected to Derby?");
 			} catch(NullPointerException e)
 			{
-				System.out.println("No such item found!");
+//				System.out.println("No such item found!");
 			}
 		}//End search entered
 		
@@ -97,17 +94,16 @@ public class Catalog extends HttpServlet {
 			try
 			{
 				itemList = itemDao.getItemsByCategory(Integer.parseInt((String) request.getParameter("category")));
-				System.out.println("In Catalog, category success.");
+//				System.out.println("In Catalog, category success.");
 			} catch (SQLException e)
 			{
-				System.out.println("In Catalog, category fail.");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				System.out.println("In Catalog, category fail.");
+				System.out.println("ERROR! (Catalog.java) Could not search database by category.\n Are you connected to Derby?");
 			}
 		}//End category selected
 		
-		System.out.println("What was found: ");
-		System.out.println(itemList);
+//		System.out.println("What was found: ");
+//		System.out.println(itemList);
 		
 		//Poke the itemList into request scope to be displayed by jspx file
 		request.setAttribute("items", itemList);
@@ -126,10 +122,10 @@ public class Catalog extends HttpServlet {
 
 		
 		String itemNameToAdd = request.getParameter("cartAdd");
-		System.out.println("Item to add to cart:" + itemNameToAdd);
+//		System.out.println("Item to add to cart:" + itemNameToAdd);
 		try
 		{
-			System.out.println("In Catalog, adding to cart.");
+//			System.out.println("In Catalog, adding to cart.");
 			if(itemNameToAdd != null)
 			{
 				ItemBean toAdd = itemDao.getItemsByName(itemNameToAdd).get(0);
@@ -148,21 +144,19 @@ public class Catalog extends HttpServlet {
 				if(inCartFlag == 0)
 					cart.add(toAdd);
 			}
-			System.out.println("In Catalog, cart success.");
+//			System.out.println("In Catalog, cart success.");
 		} catch (SQLException e)
 		{
-			System.out.println("In Catalog, cart failure.");
-			// TODO Auto-generated catch block
+//			System.out.println("In Catalog, cart failure.");
 			e.printStackTrace();
 		}
 		session.setAttribute("cart", cart);
-		System.out.println("PRINTING CART: " + cart);
+//		System.out.println("PRINTING CART: " + cart);
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
