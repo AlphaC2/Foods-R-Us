@@ -18,7 +18,15 @@
 	<td><a href="eFoods">Homepage</a></td>
 	<td><a href="Catalog"> Catalog</a></td>
 	<td><a href="Cart"> Cart</a></td>
-	<td><a href="#">${login_status}</a></td>
+	<c:choose>
+	<c:when test="${empty loggedIn}">
+		<td><a href="Admin">Login</a></td>
+	</c:when>
+	<c:otherwise>
+		<td><a href="Admin?loggedIn=out">Logout</a></td>
+	</c:otherwise>
+	</c:choose>
+	
 	<td>
 		<div class="dropdown">
 		<button class="dropbtn"><a href="Cart"> Cart</a></button>

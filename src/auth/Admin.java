@@ -1,6 +1,8 @@
 package auth;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import javax.servlet.ServletException;
@@ -28,34 +30,65 @@ public class Admin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int nonce; 
 		
 		//Redirected request from red server  
-		if(request.getAttribute("username") != null && request.getAttribute("hash") != null){
+		if(request.getParameter("user") != null && request.getParameter("hash") != null){
+			System.out.println("Redirected request from auth server, now verifying credentials");
+			
 			//Pull nonce from context
+			nonce = (int) request.getSession().getAttribute("nonce");
+			//System.out.println("Nonce:"+nonce);
 			
-			//Hash username and nonce and check against hash
+			//Hash nonce+username and check against hash
+			String hashParam = request.getParameter("hash").substring(0, request.getParameter("hash").length()-3);
+			String userParam = request.getParameter("user");
+			String dataString = nonce+userParam;
+			try{
+				MessageDigest md = MessageDigest.getInstance("SHA-1");
+				byte[] data = dataString.getBytes();
+				dataString = bytesToHex(md.digest(data));
+				//System.out.println("Computed Hash:"+dataString);
+				//System.out.println("Hash Param   :"+hashParam);
+			}catch (NoSuchAlgorithmException e){
+				e.printStackTrace();
+			}
 			
-			//If hashes match, user is now logged in
-			
-			//Otherwise, remove loggedIn attribute and forward to Auth again
+			//Check computer has and hash from request
+			if (dataString.equals(hashParam)){
+				//Log the user in and set appropriate attributes, then forward back to dashboard
+				request.setAttribute("loggedIn", true);
+				System.out.println("User is now logged in");
+				request.getSession().setAttribute("user", userParam);
+				request.setAttribute("target", "Home");
+				this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+				
+			}else{//Otherwise, remove loggedIn attribute and forward to Auth again
+				System.out.println("Invalid credentials, please try again");
+				request.removeAttribute("loggedIn");
+				this.getServletContext().getRequestDispatcher("/Admin").forward(request, response);
+			}
+		
 			
 		}else if (request.getAttribute("loggedIn") == null){
 			//Generate a nonce
+			System.out.println("Attempting to authenticate user");
 			SecureRandom random = new SecureRandom();
-			int nonce = random.nextInt();
+			nonce = random.nextInt();
 			System.out.println("nonce:"+nonce);
 			
 			//Poke the user and nonce into the context (request.getServletContext())
-			
+			request.getSession().setAttribute("nonce", nonce);
 			
 			//Redirect request to perl server with nonce and back pointer
 			String back = "http://localhost:4413/Food_R_Us/Admin";
-			response.sendRedirect("http://www.eecs.yorku.ca/~cse13179/auth/Auth.cgi");
+			String authServer = "http://www.eecs.yorku.ca/~cse13179/auth/Auth.cgi";
+			System.out.println("Redirecting to authentication server");
+			response.sendRedirect("https://www.eecs.yorku.ca/~cse13179/auth/Auth.cgi?back="+back+"&nonce="+nonce);
 			//response.sendRedirect("http://www.eecs.yorku.ca/~roumani/course/4413/lab/C/C2.html");
 			
 		//Log out request
-		}else if (request.getAttribute("loggedIn").equals("out")){
+		}else if (request.getParameter("loggedIn").equals("out")){
 			request.removeAttribute("loggedIn");
 			System.out.println("Logged out");
 			this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
@@ -73,5 +106,21 @@ public class Admin extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	
+	/**
+	 * Given an array of bytes, convert it to a string of hex digits.
+	 */
+	private static String bytesToHex(byte[] data)
+	{
+		assert (data != null);
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < data.length; i++)
+		{
+			int tmp = data[i] & 0xFF;
+			if (tmp < 16)
+				buffer.append("0");
+			buffer.append(Integer.toHexString(tmp));
+		}
+		return buffer.toString().toLowerCase();
+	}
 }
