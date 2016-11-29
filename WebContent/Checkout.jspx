@@ -12,6 +12,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:choose>
+	<c:when test="${empty cart }">
+	<meta http-equiv="refresh" content="0; url=eFoods" />
+	</c:when>
+</c:choose>
 <div align="center">
 <div style="width:50%">
 <table style="width:100%" border="1">
