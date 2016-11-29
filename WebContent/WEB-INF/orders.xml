@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <orders>
-	<order id="1">
+	<order>
 		<user>Meower</user>
 		<item>
 			<name>Meowmix</name>
@@ -9,7 +9,7 @@
 		<tax>1.11</tax>
 		<total>4.44</total>
 	</order>
-	<order id="1">
+	<order>
 		<user>Meower2</user>
 		<item>
 			<name>Meowmix</name>
@@ -18,7 +18,7 @@
 		<tax>1.11</tax>
 		<total>4.44</total>
 	</order>
-	<order id="1">
+	<order>
 		<user>fscott</user>
 		<item>
 			<name>Meowmix</name>

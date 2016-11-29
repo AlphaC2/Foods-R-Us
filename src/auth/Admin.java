@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Admin
@@ -31,6 +32,7 @@ public class Admin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int nonce; 
+		HttpSession session = request.getSession();
 		
 		//Redirected request from red server  
 		if(request.getParameter("user") != null && request.getParameter("hash") != null){
@@ -62,11 +64,13 @@ public class Admin extends HttpServlet {
 				request.getSession().setAttribute("user", userParam);
 				request.setAttribute("target", "Home");
 				this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
+				session.setAttribute("loggedIn", true);
 				
 			}else{//Otherwise, remove loggedIn attribute and forward to Auth again
 				System.out.println("Invalid credentials, please try again");
 				request.removeAttribute("loggedIn");
 				this.getServletContext().getRequestDispatcher("/Admin").forward(request, response);
+				session.removeAttribute("loggedIn");
 			}
 		
 			
@@ -92,7 +96,7 @@ public class Admin extends HttpServlet {
 			request.removeAttribute("loggedIn");
 			System.out.println("Logged out");
 			this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
-			
+			session.removeAttribute("loggedIn");
 		}else{
 			this.getServletContext().getRequestDispatcher("/Dashboard.jspx").forward(request, response);
 		}

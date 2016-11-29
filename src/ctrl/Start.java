@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -34,8 +35,10 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
 //		System.out.println("Request Start");
-		XmlHandler.readXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), "fscott" );
+		XmlHandler.writeXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), "fscott" );
 			//Set content pane to the home page
 		String target = null; //Request.forward parameter 
 		try
@@ -68,7 +71,9 @@ public class Start extends HttpServlet {
 			request.setAttribute("target", "Home");
 			target = "/Dashboard.jspx";
 		}
-
+			//Check if logged in
+		if(session.getAttribute("loggedIn") != null)
+			request.setAttribute("loggedIn", true);
 		this.getServletContext().getRequestDispatcher(target).forward(request, response);
 //		System.out.println("Request End");
 	}

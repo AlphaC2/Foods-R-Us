@@ -31,9 +31,19 @@
 			</c:forEach>
 		</table> 
 		<br/>
-	<div align="right">
-	<a href="Checkout">Checkout</a>
-	</div>
+	
+		
+		<div align="right">
+		<c:choose>
+		<c:when test="${not empty loggedIn }">
+			<a href="Checkout">Checkout</a>
+		</c:when>
+		<c:otherwise>
+			Please <a href="Admin">Login</a> to checkout.
+		</c:otherwise>
+		</c:choose>
+		</div>
+	
 	</c:when>
 	<c:otherwise>
 		No items in cart.

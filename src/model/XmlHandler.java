@@ -9,13 +9,36 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 public class XmlHandler
 {
 		//Read and list relevant XML entries
-	public void writeXml()
+	public static void writeXml(File xmlFile, String userName)
 	{
-		
+		try
+		{
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(xmlFile);
+			
+			NodeList nodes = doc.getElementsByTagName("order");
+			Node newNode = nodes.item(0).cloneNode(false);
+			
+			Text a = doc.createTextNode("Dogman"); 
+			Element p = doc.createElement("user"); 
+			p.appendChild(a); 
+			
+			newNode.insertBefore(p, null);
+			nodes.item(0).getParentNode().insertBefore(newNode, nodes.item(0));
+			
+			readXml(xmlFile, userName);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("Something went wrong reading from XML!");
+		}
 	}
 	
 		//Write new order entries to the XML record
@@ -51,6 +74,7 @@ public class XmlHandler
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			System.out.println("Something went wrong writing to XML!");
 		}
 	}

@@ -59,6 +59,8 @@ public class Catalog extends HttpServlet {
 			target = "/Cart";
 		}
 	
+		if(session.getAttribute("loggedIn") != null)
+			request.setAttribute("loggedIn", true);
 		this.getServletContext().getRequestDispatcher(target).forward(request, response);
 	}
 

@@ -96,6 +96,9 @@ public class Cart extends HttpServlet {
 			request.setAttribute("target", "Catalog");
 			target = "/Catalog";
 		}
+			//Check if logged in
+		if(session.getAttribute("loggedIn") != null)
+			request.setAttribute("loggedIn", true);
 			//Forward to the cart page
 //		request.setAttribute("target", "Cart");
 		this.getServletContext().getRequestDispatcher(target).forward(request, response);

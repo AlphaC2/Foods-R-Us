@@ -68,6 +68,10 @@ public class Checkout extends HttpServlet {
 		
 			//Forward user to checkout page
 		request.setAttribute("target", "Checkout");
+		
+			//Check if user is logged in
+		if(session.getAttribute("loggedIn") != null)
+			request.setAttribute("loggedIn", true);
 		this.getServletContext().getRequestDispatcher("/Checkout.jspx").forward(request, response);
 	}
 
