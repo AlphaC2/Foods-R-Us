@@ -16,4 +16,8 @@
     <param-name>taxPercent</param-name>
     <param-value>0.13</param-value>
   </context-param>
+  <context-param>
+  	<param-name>suggestion</param-name>
+  	<param-value>1409S413,2002H712</param-value>
+  </context-param>
 </web-app>

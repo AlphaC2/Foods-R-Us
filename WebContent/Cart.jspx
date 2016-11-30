@@ -42,6 +42,7 @@
 			Please <a href="Admin">Login</a> to checkout.
 		</c:otherwise>
 		</c:choose>
+		<div id="suggestion">Suggestions</div>
 		</div>
 	
 	</c:when>
