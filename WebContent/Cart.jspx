@@ -42,7 +42,11 @@
 			Please <a href="Admin">Login</a> to checkout.
 		</c:otherwise>
 		</c:choose>
-		<div id="suggestion">Suggestions</div>
+		
+		
+		Thank you for choosing Foods r Us.
+		
+		
 		</div>
 	
 	</c:when>

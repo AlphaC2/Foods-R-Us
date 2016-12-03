@@ -117,9 +117,29 @@ public class Catalog extends HttpServlet {
 	{
 		
 		ArrayList<ItemBean> cart = new ArrayList<ItemBean>();
+			//Get the users existing cart, if it exists
 		if(session.getAttribute("cart") != null)
 		{
 			cart = (ArrayList<ItemBean>) session.getAttribute("cart");
+		}
+			//Get time from session start to when user added to cart
+		if(session.getAttribute("timeToCartChecked") == null)
+		{
+				//Calculate time to cart, average among other users
+			long currentTime = System.currentTimeMillis();
+			long timeToCart = currentTime - session.getCreationTime();
+				//If this is the first user, create the context attribute
+			if(request.getServletContext().getAttribute("avgTimeToCart") == null)
+				request.getServletContext().setAttribute("avgTimeToCart", timeToCart);
+			else
+			{
+				long currentAverage = (long) request.getServletContext().getAttribute("avgTimeToCart");
+				currentAverage = (currentAverage + timeToCart)/2;
+				request.getServletContext().setAttribute("avgTimeToCart", currentAverage);
+			}
+				//Ensure each user is only counted once
+			session.setAttribute("timeToCartChecked", true);
+			System.out.println("Time to cart:" + request.getServletContext().getAttribute("avgTimeToCart"));
 		}
 
 		

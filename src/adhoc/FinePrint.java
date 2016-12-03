@@ -97,10 +97,10 @@ public class FinePrint implements Filter {
 				//Define replacement strings
 			String replacement = "Since you have " + mustMatch.get(0).getName() + "in your cart you may like " + suggestedItem.get(0).getName();
 
-			payload = payload.replaceAll("Suggestions", replacement);
-
+			payload = payload.replaceAll("Thank you for choosing Foods r Us.", replacement);
+			request.setAttribute("suggesting", "meow");
 			response.getWriter().println(payload);
-
+			
 		}
 		else
 			chain.doFilter(request, response);
