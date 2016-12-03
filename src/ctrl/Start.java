@@ -38,7 +38,7 @@ public class Start extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 //		System.out.println("Request Start");
-		XmlHandler.writeXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), "fscott" );
+//		XmlHandler.writeXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), "fscott" );
 			//Set content pane to the home page
 		String target = null; //Request.forward parameter 
 		try

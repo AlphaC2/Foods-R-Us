@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.Writer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,7 +43,7 @@ public class XmlHandler
 	}
 	
 		//Write new order entries to the XML record
-	public static void readXml(File xmlFile, String userName)
+	public static void readXml(File xmlFile, String userName, Writer write)
 	{
 		try
 		{
@@ -64,7 +65,8 @@ public class XmlHandler
 				if(nNode.getNodeType() == Node.ELEMENT_NODE)
 				{
 					Element element = (Element) nNode;
-					
+					write.append("User: " + element.getElementsByTagName("user").item(0).getTextContent() + "\n");
+					write.append("Item: " + element.getElementsByTagName("item").item(0).getTextContent() + "\n");
 					System.out.println("User: " + element.getElementsByTagName("user").item(0).getTextContent());
 					System.out.println("Item: " + element.getElementsByTagName("item").item(0).getTextContent());
 					System.out.println("");
@@ -75,7 +77,7 @@ public class XmlHandler
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("Something went wrong writing to XML!");
+			System.out.println("Something went wrong reading from XML!");
 		}
 	}
 }
