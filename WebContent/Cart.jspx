@@ -7,8 +7,10 @@
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
+		
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,15 +22,29 @@
 			<th>Item</th>
 			<th>Price</th>
 			<th>Quantity</th>
+			<th>Cost</th>
 			</tr>
 			 <c:forEach var="row" items="${cart}">
 			   <tr>
 			    <th>${row.name }</th>
 			    <th>$${row.price }</th>
 			    <th>${row.quantity }</th>
+			    <th>$$</th>
 			    <th> <button type="submit" name="cartRemove" value="${row.name }">Remove from cart</button> </th>
 			  </tr>
 			</c:forEach>
+			<tr>
+			<th>Shipping: </th>
+			<th>$${shipping }</th>
+			</tr>
+			<tr>
+			<th>Tax:</th>
+			<th>$${tax }</th>
+			</tr>
+			<tr>
+			<th>Total:</th>
+			<th>$${cartTotal }</th>
+			</tr>
 		</table> 
 		<br/>
 	

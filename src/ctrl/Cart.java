@@ -100,7 +100,18 @@ public class Cart extends HttpServlet {
 		if(session.getAttribute("loggedIn") != null)
 			request.setAttribute("loggedIn", true);
 			//Forward to the cart page
-//		request.setAttribute("target", "Cart");
+		if(session.getAttribute("cart") != null)
+		{
+			double tax = (double)session.getAttribute("cartTotal") * Double.parseDouble(this.getServletContext().getInitParameter("taxPercent"));
+			request.setAttribute("tax", tax);
+			
+				//Check for free shipping before applying tax and shipping cost
+			double shipping = Double.parseDouble(this.getServletContext().getInitParameter("shippingCost"));
+			if((double)session.getAttribute("cartTotal") >= Double.parseDouble(this.getServletContext().getInitParameter("freeShipMin")))
+				shipping = 0.00;
+			request.setAttribute("shipping", shipping);
+			request.setAttribute("cartTotal", (double)session.getAttribute("cartTotal")+tax+shipping);
+		}
 		this.getServletContext().getRequestDispatcher(target).forward(request, response);
 	}
 

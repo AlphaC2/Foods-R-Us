@@ -13,6 +13,11 @@
 </head>
 <body>
 <c:choose>
+<c:when test="${not empty submitOrder }">
+THANKS DAWG
+</c:when>
+<c:otherwise>
+<c:choose>
 	<c:when test="${empty cart }">
 	<meta http-equiv="refresh" content="0; url=eFoods" />
 	</c:when>
@@ -61,6 +66,8 @@
 </div>
 </div>
 </div>
+</c:otherwise>
+</c:choose>
 </body>
 </html>
 </jsp:root>

@@ -122,6 +122,11 @@ public class Catalog extends HttpServlet {
 		{
 			cart = (ArrayList<ItemBean>) session.getAttribute("cart");
 		}
+		//Initialize carttotal if necessary
+		if(session.getAttribute("cartTotal") == null)
+		{
+			session.setAttribute("cartTotal", 0.00);
+		}
 			//Get time from session start to when user added to cart
 		if(session.getAttribute("timeToCartChecked") == null)
 		{
@@ -165,6 +170,9 @@ public class Catalog extends HttpServlet {
 					//New item - add to cart with quantity 1
 				if(inCartFlag == 0)
 					cart.add(toAdd);
+				
+					//Add this items price to cart
+				session.setAttribute("cartTotal", (double) session.getAttribute("cartTotal") + toAdd.getPrice());
 			}
 //			System.out.println("In Catalog, cart success.");
 		} catch (SQLException e)
@@ -172,6 +180,7 @@ public class Catalog extends HttpServlet {
 //			System.out.println("In Catalog, cart failure.");
 			e.printStackTrace();
 		}
+		
 		session.setAttribute("cart", cart);
 //		System.out.println("PRINTING CART: " + cart);
 	}
