@@ -3,7 +3,9 @@ package model;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +18,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -53,8 +56,6 @@ public class XmlHandler
 			content = content.replaceAll("</orders>", xmlString);
 			Files.write(xml, content.getBytes());
 			System.out.println(content);
-			
-			readXml(xmlFile, userName);
 		}
 		catch(Exception e)
 		{
@@ -64,8 +65,15 @@ public class XmlHandler
 	}
 	
 		//Write new order entries to the XML record
-	public static void readXml(File xmlFile, String userName)
+	public static void readXml(File xmlFile, String userName, File htmlFile) throws IOException
 	{
+			//For writing to html
+		Path html = Paths.get(htmlFile.getAbsolutePath());
+		String content = new String(Files.readAllBytes(html));
+			//Create a table to insert items into
+		String htmlString = "<table style=\"width:100%\" border=\"1\">";
+		
+		
 		try
 		{
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -84,7 +92,7 @@ public class XmlHandler
 					
 					if(element.getElementsByTagName("user").item(0).getTextContent().equals(userName))
 					{
-						System.out.println("User: " + element.getElementsByTagName("user").item(0).getTextContent());
+//						System.out.println("User: " + element.getElementsByTagName("user").item(0).getTextContent());
 						
 						
 						NodeList itemList = element.getElementsByTagName("item");
@@ -92,12 +100,22 @@ public class XmlHandler
 						{
 							Node currentItem = (Element) itemList.item(j);
 							Element itemElement = (Element) currentItem;
-							System.out.println("Item: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
-							System.out.println("Quantity: " + itemElement.getElementsByTagName("quantity").item(0).getTextContent());
-							System.out.println("Price: " + itemElement.getElementsByTagName("price").item(0).getTextContent());
+//							System.out.println("Item: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
+//							System.out.println("Quantity: " + itemElement.getElementsByTagName("quantity").item(0).getTextContent());
+//							System.out.println("Price: " + itemElement.getElementsByTagName("price").item(0).getTextContent());
+								//Stick new item into table
+							htmlString = htmlString + "<tr>" +
+									"<th>Name:"+itemElement.getElementsByTagName("name").item(0).getTextContent()+"</th>"+
+									"<th>Quantity: " + itemElement.getElementsByTagName("quantity").item(0).getTextContent()+"</th>"+
+									"<th>Price: " + itemElement.getElementsByTagName("price").item(0).getTextContent()+"</th>"+
+									"</tr>";
 						}
-						System.out.println("Shipping: " + element.getElementsByTagName("shipping").item(0).getTextContent());
-						System.out.println("");
+//						System.out.println("Shipping: " + element.getElementsByTagName("shipping").item(0).getTextContent());
+						htmlString = htmlString + "<tr>Shipping:<th>"+element.getElementsByTagName("shipping").item(0).getTextContent()+"</th></tr>";
+						htmlString = htmlString + "<tr>Tax:<th>"+element.getElementsByTagName("tax").item(0).getTextContent()+"</th></tr>";
+//						System.out.println("");
+						//Close the table
+						htmlString = htmlString + "</table><table style=\"width:100%\" border=\"1\">";
 					}
 				}
 			}
@@ -107,5 +125,10 @@ public class XmlHandler
 			e.printStackTrace();
 			System.out.println("Something went wrong reading from XML!");
 		}
+		htmlString = htmlString + "</table>";
+		content = content.replaceAll("Place your username in the address bar above as ?user=(your name here)", htmlString);
+		System.out.println(content);
+		System.out.println(htmlString);
+		Files.write(html, content.getBytes());
 	}
 }

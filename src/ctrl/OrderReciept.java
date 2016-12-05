@@ -33,11 +33,12 @@ public class OrderReciept extends HttpServlet {
 			//Get client session
 		HttpSession session = request.getSession();
 		File xmlFile = new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml"));
-		
+		File htmlFile = new File(this.getServletContext().getRealPath("/orders.jspx"));
+		String user = (String) request.getParameter("user");
 			//Call Xmlhander to retrieve the users order
-		XmlHandler.readXml(xmlFile, "TEST");
+		XmlHandler.readXml(xmlFile, user, htmlFile);
 		
-		
+		this.getServletContext().getRequestDispatcher("/orders.jspx").forward(request, response);
 	}
 
 	/**
