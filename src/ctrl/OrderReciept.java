@@ -35,7 +35,9 @@ public class OrderReciept extends HttpServlet {
 		File xmlFile = new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml"));
 		
 			//Call Xmlhander to retrieve the users order
-		XmlHandler.readXml(xmlFile, "fscott", response.getWriter());
+		XmlHandler.readXml(xmlFile, "TEST");
+		
+		
 	}
 
 	/**

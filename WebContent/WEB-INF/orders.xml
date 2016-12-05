@@ -7,6 +7,7 @@
 		<price>3.33</price>
 		</item>
 		<tax>1.11</tax>
+		<shipping>5.00</shipping>
 		<total>4.44</total>
 	</order>
 </orders>

@@ -9,7 +9,7 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Insert title here</title>
+<title>Checkout</title>
 </head>
 <body>
 <c:choose>
@@ -56,7 +56,7 @@
 </div>
 <div align="right" display="inline">
 <form method="POST">
-<button type="submit" name="submitOrder" value="submitted">Submit order!</button>
+<button type="submit" name="submitOrder" id='submitOrder"' value="submitted">Submit order!</button>
 </form>
 </div>
 </div>

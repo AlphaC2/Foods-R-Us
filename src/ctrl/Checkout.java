@@ -1,5 +1,6 @@
 package ctrl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.ItemBean;
+import model.XmlHandler;
 
 /**
  * Servlet implementation class Checkout
@@ -67,6 +69,21 @@ public class Checkout extends HttpServlet {
 			//Calculate total, poke into request
 		totalCost = (taxCost + totalCost) + shippingCost;
 		request.setAttribute("total", totalCost);
+		
+		
+		//User is submitting an order - user must be logged in to do so
+		if((request.getParameter("submitOrder") != null) && (session.getAttribute("loggedIn") != null))
+		{
+			System.out.println("SUBMITTING");
+			request.setAttribute("loggedIn", true);
+			@SuppressWarnings("unchecked")
+			ArrayList<ItemBean> ibl = (ArrayList<ItemBean>) session.getAttribute("cart");
+			String user = (String) session.getAttribute("user");
+			XmlHandler.writeXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), user, ""+shippingCost, ""+taxCost,
+					""+totalCost, ibl);
+		}
+		
+		
 		
 			//Forward user to checkout page
 		request.setAttribute("target", "Checkout");

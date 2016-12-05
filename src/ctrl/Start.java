@@ -38,11 +38,7 @@ public class Start extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 //		System.out.println("Request Start");
-		ItemBean ib = new ItemBean("Hello", 10.99);
-		ArrayList<ItemBean> ibl = new ArrayList<ItemBean>();
-		ibl.add(ib);
-		
-		XmlHandler.writeXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), "TEST", ibl);
+
 			//Set content pane to the home page
 		String target = null; //Request.forward parameter 
 		try
