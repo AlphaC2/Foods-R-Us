@@ -4,6 +4,7 @@
 		<user>Meower</user>
 		<item>
 		<name>Meowmix</name>
+		<quantity>10</quantity>
 		<price>3.33</price>
 		</item>
 		<tax>1.11</tax>

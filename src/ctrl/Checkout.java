@@ -52,8 +52,10 @@ public class Checkout extends HttpServlet {
 			//Iterate over all items in cart, adding up cost of items
 		for(int i = 0; i < cart.size(); i++)
 		{
+				//Multiply item cost by how many are ordered
+			double itemCost = cart.get(i).getPrice() * cart.get(i).getQuantity();
 				//Add cost of item to total cart price
-			totalCost += cart.get(i).getPrice(); 
+			totalCost += itemCost; 
 		}
 			//Poke subtotal into request before adding shipping and tax
 		request.setAttribute("subtotal", totalCost);

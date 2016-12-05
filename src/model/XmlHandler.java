@@ -37,8 +37,8 @@ public class XmlHandler
 			{
 				String name = items.get(i).getName();
 				String price = items.get(i).getPrice().toString();
-				
-				itemString = itemString + "<item><name>" + name + "</name><price>" + price + "</price></item>"; 
+				String quantity = ""+items.get(i).getQuantity();
+				itemString = itemString + "<item><name>" + name + "</name><quantity>" + quantity +"</quantity><price>" + price + "</price></item>"; 
 			}
 			
 				//The new xml entry to append
@@ -93,6 +93,7 @@ public class XmlHandler
 							Node currentItem = (Element) itemList.item(j);
 							Element itemElement = (Element) currentItem;
 							System.out.println("Item: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
+							System.out.println("Quantity: " + itemElement.getElementsByTagName("quantity").item(0).getTextContent());
 							System.out.println("Price: " + itemElement.getElementsByTagName("price").item(0).getTextContent());
 						}
 						System.out.println("Shipping: " + element.getElementsByTagName("shipping").item(0).getTextContent());
