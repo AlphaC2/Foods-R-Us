@@ -9,26 +9,4 @@
 		<tax>1.11</tax>
 		<total>4.44</total>
 	</order>
-	<order>
-		<user>Meower2</user>
-		<item>
-		<name>Meowmix</name>
-		<price>3.33</price>
-		</item>
-		<tax>1.11</tax>
-		<total>4.44</total>
-	</order>
-	<order>
-		<user>fscott</user>
-		<item>
-		<name>Meowmix</name>
-		<price>3.33</price>
-		</item>
-		<item>
-		<name>cat</name>
-		<price>9.99</price>
-		</item>
-		<tax>1.11</tax>
-		<total>4.44</total>
-	</order>
 </orders>

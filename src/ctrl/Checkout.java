@@ -33,6 +33,8 @@ public class Checkout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
+		
+		
 		//Get externally decided costs minimum from web.xml
 		final double freeShipMin = Double.parseDouble(this.getServletContext().getInitParameter("freeShipMin"));
 		double shippingCost = Double.parseDouble(this.getServletContext().getInitParameter("shippingCost"));

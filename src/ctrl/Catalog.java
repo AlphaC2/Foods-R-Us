@@ -50,7 +50,7 @@ public class Catalog extends HttpServlet {
 		addToCart(request, response, itemDao, session);
 
 			//Set target of content pane to catalog view - Refresh Dashboard
-		System.out.println("Catalog.java end");
+//		System.out.println("Catalog.java end");
 		if((request.getParameter("cartAdd") == null) && (request.getParameter("cartRemove") == null)){
 			request.setAttribute("target", "Catalog");
 			target = "/Dashboard.jspx";
@@ -92,7 +92,7 @@ public class Catalog extends HttpServlet {
 			//Check if user has selected a category from sidebar
 		if(request.getParameter("category") != null)
 		{//Category selected
-			System.out.println("In Catalog, doing categories.");
+//			System.out.println("In Catalog, doing categories.");
 			try
 			{
 				itemList = itemDao.getItemsByCategory(Integer.parseInt((String) request.getParameter("category")));
@@ -139,7 +139,7 @@ public class Catalog extends HttpServlet {
 			}
 				//Ensure each user is only counted once
 			session.setAttribute("timeToCartChecked", true);
-			System.out.println("Time to cart:" + request.getServletContext().getAttribute("avgTimeToCart"));
+//			System.out.println("Time to cart:" + request.getServletContext().getAttribute("avgTimeToCart"));
 		}
 
 		

@@ -62,11 +62,11 @@ public class FinePrint implements Filter {
 		{
 			itemList = itemDao.getItemsByName(suggestionBase);
 			mustMatch = itemDao.getItemsByName((String) request.getParameter("cartAdd"));
-			System.out.println("SUGGESTION BASE: " + itemList);
+//			System.out.println("SUGGESTION BASE: " + itemList);
 			
-			System.out.println(mustMatch.size());
+//			System.out.println(mustMatch.size());
 			
-			System.out.println(itemList.equals(mustMatch));
+//			System.out.println(itemList.equals(mustMatch));
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
