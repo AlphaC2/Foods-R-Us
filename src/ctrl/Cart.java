@@ -69,6 +69,9 @@ public class Cart extends HttpServlet {
 						//Item found!
 					if(cart.get(i).equals(toRemove.get(0)))
 					{
+						double toDeduct = cart.get(i).getQuantity() * cart.get(i).getPrice();
+						session.setAttribute("cartTotal", (double)session.getAttribute("cartTotal")-toDeduct);
+						
 							//Reset quantity to 0 - prevent previous quantity from being remembered if removed then readded to cart
 						cart.get(i).setQuantity(0);
 						toRemove.get(0).setQuantity(0);
