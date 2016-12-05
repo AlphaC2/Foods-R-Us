@@ -56,7 +56,6 @@ public class Checkout extends HttpServlet {
 			double itemCost = cart.get(i).getPrice() * cart.get(i).getQuantity();
 				//Add cost of item to total cart price
 			totalCost += itemCost; 
-			request.setAttribute("Checkedout", true);
 		}
 			//Poke subtotal into request before adding shipping and tax
 		request.setAttribute("subtotal", totalCost);
@@ -78,12 +77,12 @@ public class Checkout extends HttpServlet {
 		if((request.getParameter("submitOrder") != null) && (session.getAttribute("loggedIn") != null))
 		{
 			System.out.println("SUBMITTING");
-			request.setAttribute("loggedIn", true);
 			@SuppressWarnings("unchecked")
 			ArrayList<ItemBean> ibl = (ArrayList<ItemBean>) session.getAttribute("cart");
 			String user = (String) session.getAttribute("user");
 			XmlHandler.writeXml(new File(this.getServletContext().getRealPath("/WEB-INF/orders.xml")), user, ""+shippingCost, ""+taxCost,
 					""+totalCost, ibl);
+			request.setAttribute("submitOrder", true);
 		}
 		
 		
